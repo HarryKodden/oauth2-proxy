@@ -8,7 +8,6 @@ This project sets up a test suite using Docker Compose, which includes three con
 docker-compose-test-suite
 ├── docker-compose.yml        # Defines the services for the Docker Compose application
 ├── nginx.conf
-├── oauth2-proxy.cfg
 └── README.md                 # Documentation for the project
 ```
 
@@ -39,7 +38,6 @@ This will start all the defined services. You can access the public endpoint at 
 
 ### Configuration Details
 
-- **OAuth2 Proxy**: Configured to authenticate users via Keycloak. Ensure you have the correct client ID and secret in the `oauth2-proxy.cfg` file.
 - **Nginx**: `nginx.conf` requests to the Whoami application and handles authentication for the private endpoint.
 - **Whoami Application**: A simple HTTP server that responds with details about the incoming request.
 
