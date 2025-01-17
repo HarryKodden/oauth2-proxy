@@ -5,6 +5,10 @@
   "postCreateCommand": "pre-commit install && go mod download",
   "containerEnv": { "DEVCONTAINER": "1" },
   "appPort": ["4180:4180"],
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "Service Nginx" }
+  },
   "runArgs": ["-e", "GIT_EDITOR=code --wait"],
   "customizations": {
     "vscode": {

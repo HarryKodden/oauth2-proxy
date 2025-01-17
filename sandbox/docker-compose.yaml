@@ -1,0 +1,33 @@
+services:
+  oauth2-proxy:
+    build:
+      context: ..
+      args:
+        - VERSION=localtest
+    environment:
+      OAUTH2_PROXY_PROVIDER: oidc
+      OAUTH2_PROXY_REDIRECT_URL: "http://localhost:8080/oauth2/callback"
+      OAUTH2_PROXY_OIDC_ISSUER_URL: ${PROVIDER}
+      OAUTH2_PROXY_CLIENT_ID: ${CLIENT_ID}
+      OAUTH2_PROXY_CLIENT_SECRET: ${CLIENT_SECRET}
+      OAUTH2_PROXY_COOKIE_SECRET: ${COOKIE_SECRET}
+    volumes:
+      - ./oauth2-proxy.cfg:/etc/oauth2-proxy.cfg:ro
+    command: ["--config", "/etc/oauth2-proxy.cfg"]
+    expose:
+      - "4180"
+
+  whoami:
+    image: traefik/whoami:latest
+    expose:
+      - "80"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - oauth2-proxy
+      - whoami

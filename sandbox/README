@@ -1,0 +1,58 @@
+# SANDBOX - Docker Compose Test Suite
+
+This project sets up a test suite using Docker Compose, which includes three containers: an OAuth2 Proxy, a Whoami application, and an Nginx proxy. The Nginx proxy serves two endpoints: one for public access and another for private access that requires authentication via the OAuth2 Proxy and a Keycloak identity provider.
+
+## Project Structure
+
+```
+docker-compose-test-suite
+├── docker-compose.yml        # Defines the services for the Docker Compose application
+├── nginx.conf
+├── oauth2-proxy.cfg
+└── README.md                 # Documentation for the project
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Building the Containers
+
+To build the containers, navigate to the project directory and run:
+
+```
+docker-compose build
+```
+
+### Running the Application
+
+To start the application, use the following command:
+
+```
+docker-compose up
+```
+
+This will start all the defined services. You can access the public endpoint at `http://localhost:80` and the private endpoint at `http://localhost:80/private`.
+
+### Configuration Details
+
+- **OAuth2 Proxy**: Configured to authenticate users via Keycloak. Ensure you have the correct client ID and secret in the `oauth2-proxy.cfg` file.
+- **Nginx**: `nginx.conf` requests to the Whoami application and handles authentication for the private endpoint.
+- **Whoami Application**: A simple HTTP server that responds with details about the incoming request.
+
+### Stopping the Application
+
+To stop the application, run:
+
+```
+docker-compose down
+```
+
+This will stop and remove all the containers defined in the `docker-compose.yml` file.
+
+## License
+
+This project is licensed under the MIT License.
