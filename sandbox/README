@@ -28,6 +28,14 @@ docker-compose build
 
 ### Running the Application
 
+Make sure that you have created a **.env** file with the essential OIDC Provider and Domain details of your installation. For that you can copy the provided **.env.sample**:
+
+```
+cp .env.sample .env
+```
+
+And now edit **.env** that matches your situation
+
 To start the application, use the following command:
 
 ```
